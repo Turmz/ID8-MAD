@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Álaborg</string>
     <string name="welcome_text">Hey og vælkomin til appuna hjá Føroyingafelagnum í Aalborg.</string>
+    <string name="title_activity_main_">Álaborg</string>
+    <string name="title_home">Home</string>
+    <string name="title_about_us">About us</string>
+    <string name="title_contact_us">Contact us</string>
+    <string name="title_map">Map</string>
+    <string name="title_drinks">Drinkscard</string>
+    <string name="title_test">Test</string>
 </resources>
