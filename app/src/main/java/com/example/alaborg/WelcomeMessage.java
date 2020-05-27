@@ -7,19 +7,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-public class Welcome_Message extends AppCompatActivity {
+public class WelcomeMessage extends AppCompatActivity {
 
     private static int TIME_OUT = 3000; //Time to launch the another activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("Information", "onCreate.");
+        Log.i("WelcomeMessage", "OnCreate activated!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_message);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(Welcome_Message.this, MainActivity.class);
+                Intent i = new Intent(WelcomeMessage.this, MainActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -28,25 +28,25 @@ public class Welcome_Message extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        Log.i("Information", "onStart");
+        Log.i("WelcomeMessage", "OnStart activated!");
         super.onStart();
     }
 
     @Override
     protected void onResume(){
-        Log.i("Information", "onResume");
+        Log.i("WelcomeMessage", "onResume activated!");
         super.onResume();
     }
 
     @Override
     protected void onStop(){
-        Log.i("Information", "onStop");
+        Log.i("WelcomeMessage", "onStop activated!");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        Log.i("Information", "onDestory");
+        Log.i("WelcomeMessage", "onDestory activated!");
         super.onDestroy();
 
     }

@@ -2,10 +2,15 @@
     <string name="app_name">Álaborg</string>
     <string name="welcome_text">Hey og vælkomin til appuna hjá Føroyingafelagnum í Aalborg.</string>
     <string name="title_activity_main_">Álaborg</string>
-    <string name="title_home">Home</string>
-    <string name="title_about_us">About us</string>
-    <string name="title_contact_us">Contact us</string>
-    <string name="title_map">Map</string>
-    <string name="title_drinks">Drinkscard</string>
-    <string name="title_test">Test</string>
+    <string name="title_home">Heim</string>
+    <string name="title_about_us">Um okkum</string>
+    <string name="title_contact_us">Samband</string>
+    <string name="title_map">Kort</string>
+    <string name="title_drinks">Drykkjur</string>
+    <string name="title_test">Roynd</string>
+    <string name="change_profile_picture">Broyt profilmynd</string>
+    <string name="firstname_string">Fornavn</string>
+    <string name="lastname_string">Eftirnavn</string>
+    <string name="email_string">Teldupostur</string>
+    <string name="btn_save">Goym</string>
 </resources>

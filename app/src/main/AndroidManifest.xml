@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.alaborg">
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".profile"></activity>
-        <activity android:name=".test" />
-        <activity android:name=".barcardActivity" />
-        <activity android:name=".map" />
-        <activity android:name=".contact_us" />
-        <activity android:name=".about_us" />
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".TestActivity" />
+        <activity android:name=".BarCardActivity" />
+        <activity android:name=".MapActivity" />
+        <activity android:name=".ContactUsActivity" />
+        <activity android:name=".AboutUsActivity" />
         <activity android:name=".MainActivity"/>
-        <activity android:name=".Welcome_Message">
+        <activity android:name=".WelcomeMessage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 </manifest>
