@@ -5,19 +5,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Base64;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-
-import java.io.ByteArrayOutputStream;
 
 public class ProfileActivity extends Activity
 {
@@ -25,6 +25,7 @@ public class ProfileActivity extends Activity
     private ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     public static final String MY_PREFS_NAME = "ProfileInformation";
+    private static int PICK_CONTACT = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -38,14 +39,17 @@ public class ProfileActivity extends Activity
 
         this.imageView = this.findViewById(R.id.imageView_profile_pic);
         Button photoButton = this.findViewById(R.id.btn_change_pic);
-        Button btn_save = findViewById(R.id.btn_save);
+        Button btnSave = findViewById(R.id.btn_save);
+        Button btnBestFriend = findViewById(R.id.btn_friend);
 
         final EditText etfname = findViewById(R.id.editText_fname);
         final EditText etlname = findViewById(R.id.editText_lname);
         final EditText etemail = findViewById(R.id.editText_email);
+        final TextView bff = findViewById(R.id.tvBestFriend);
         etfname.setText(prefs.getString("firstname", "Fornavn"));
         etlname.setText(prefs.getString("lastname", "Eftirnavn"));
         etemail.setText(prefs.getString("email", "Teldupostur"));
+        bff.setText(prefs.getString("bestfriend", "Besti vinur"));
 
         photoButton.setOnClickListener(new View.OnClickListener()
                 {
@@ -64,7 +68,7 @@ public class ProfileActivity extends Activity
             }
         });
 
-        btn_save.setOnClickListener(new View.OnClickListener()
+        btnSave.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -72,17 +76,28 @@ public class ProfileActivity extends Activity
                 editor.putString("firstname", etfname.getText().toString());
                 editor.putString("lastname", etlname.getText().toString());
                 editor.putString("email", etemail.getText().toString());
+                editor.putString("bestfriend", bff.getText().toString());
                 editor.apply();
                 Log.i("ProfileActivity", "First name " + etfname.getText().toString() + " saved to SharedPreferences.");
                 Log.i("ProfileActivity", "Last name " + etlname.getText().toString() + " saved to SharedPreferences.");
                 Log.i("ProfileActivity", "E-mail Address " + etemail.getText().toString() + " saved to SharedPreferences.");
+                Log.i("ProfileActivity", "Bestfriend: " + bff.getText().toString() + " saved to SharedPreferences.");
                 startActivity(new Intent(ProfileActivity.this, MainActivity.class));
                 Log.i("ProfileActivity", "Save button clicked!");
             }
         });
+
+        btnBestFriend.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                startActivityForResult(intent, PICK_CONTACT);
+                Log.i("ProfileActivity", "Search button clicked!");
+            }
+        });
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
@@ -110,6 +125,18 @@ public class ProfileActivity extends Activity
         {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(photo);
+        }
+
+        if (requestCode == PICK_CONTACT) {
+            if (resultCode == RESULT_OK) {
+                Uri contactUri = data.getData();
+                Cursor cursor = getContentResolver().query(contactUri, null, null, null, null);
+                cursor.moveToFirst();
+                int column = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+                String name = cursor.getString(column);
+                TextView display = findViewById(R.id.tvBestFriend);
+                display.setText(name);
+            }
         }
     }
 

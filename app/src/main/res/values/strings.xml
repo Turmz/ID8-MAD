@@ -13,4 +13,5 @@
     <string name="lastname_string">Eftirnavn</string>
     <string name="email_string">Teldupostur</string>
     <string name="btn_save">Goym</string>
+    <string name="bestfriend">Besti vinur</string>
 </resources>
